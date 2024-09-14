@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ejjumo.playlist.dao.PlaylistDAO">
+    <insert id="insert" parameterType="Playlist">
+        insert into playlist (playlist_id, user_id, playlist_name, description, created_at, updated_at)
+        values (#{playlistId}, #{userId}, #{playlistName}, #{description}, now(), now())
+    </insert>
+
+    <update id="update" parameterType="Playlist">
+        update playlist set playlist_name=#{playlistName}, description=#{description}, updated_at=now()
+        where playlist_id=#{playlistId}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from playlist where playlist_id=#{playlistId}
+    </delete>
+
+    <select id="select" parameterType="int"
+            resultType="Playlist">
+        select playlist_id playlistId, user_id userId, playlist_name playlistName, description, created_at createdAt, updated_at updatedAt
+        from playlist
+        where playlist_id=#{playlistId}
+    </select>
+
+    <select id="selectAll" resultType="Playlist">
+        select playlist_id playlistId, user_id userId, playlist_name playlistName, description, created_at createdAt, updated_at updatedAt
+        from playlist
+    </select>
+
+    <select id="selectByUserId" parameterType="int"
+            resultType="Playlist">
+        select playlist_id playlistId, user_id userId, playlist_name playlistName, description, created_at createdAt, updated_at updatedAt
+        from playlist
+        where user_id=#{userId}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
