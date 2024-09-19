@@ -18,10 +18,16 @@
     </delete>
 
     <select id="select" parameterType="int"
-            resultType="Playlist">
-        select playlist_id playlistId, user_id userId, playlist_name playlistName, description, created_at createdAt, updated_at updatedAt
-        from playlist
-        where playlist_id=#{playlistId}
+            resultType="PlaylistDetail">
+        select p.playlist_id playlistId, u.user_id userId, user_name userName, playlist_name playlistName, description, thumbs, (
+            select count(*) from comment c where c.playlist_id=p.playlist_id
+        ) comments, (
+            select is_thumbsup from thumbsup t where p.playlist_id=t.playlist_id
+        ) isThumbsup, (
+            select thumbnail from song s where s.playlist_id=p.playlist_id limit 1
+        ) thumbnail
+        from playlist p, user u
+        where p.user_id=u.user_id and p.playlist_id=#{playlistId};
     </select>
 
     <select id="selectAll" resultType="Playlist">
