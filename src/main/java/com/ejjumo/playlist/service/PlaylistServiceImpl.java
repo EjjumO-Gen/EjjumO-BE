@@ -28,13 +28,10 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     public Playlist find(int playlistId) throws SQLException {
-        System.out.println("playlistId: " + playlistId);
-        System.out.println(playlistdao.select(playlistId).toString());
         return playlistdao.select(playlistId);
     }
 
     public List<Playlist> findAll() throws SQLException {
-        System.out.println("findAll");
         return playlistdao.selectAll();
     }
 
