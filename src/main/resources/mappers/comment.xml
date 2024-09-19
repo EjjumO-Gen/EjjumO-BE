@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ejjumo.comment.dao.CommentDAO">
+    <insert id="insert" parameterType="Comment">
+        insert into comment (comment_id, user_id, playlist_id, content, created_at, updated_at)
+        values (#{commentId}, #{userId}, #{playlistId}, #{content}, now(), now())
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from comment where comment_id=#{commentId}
+    </delete>
+
+    <select id="selectByPlaylist" parameterType="int"
+            resultType="Comment">
+        select comment_id commentId, user_id userId, playlist_id playlistId, content, is_checked isChecked, created_at createdAt, updated_at updatedAt, (
+            select user_name from user u where u.user_id=c.user_id
+        ) userName, (
+            select profile_pic from user u where u.user_id=c.user_id
+        ) profilePic
+        from comment c
+        where playlist_id=#{playlistId}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
