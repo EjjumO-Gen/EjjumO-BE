@@ -1,6 +1,7 @@
 package com.ejjumo.playlist.controller;
 
 import com.ejjumo.playlist.dto.Playlist;
+import com.ejjumo.playlist.dto.PlaylistWithSong;
 import com.ejjumo.playlist.service.PlaylistService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class PlaylistController {
     }
 
     @GetMapping(params = "id")
-    public Playlist getPlaylistById(@RequestParam("id") int playlistId) throws SQLException {
+    public PlaylistWithSong getPlaylistById(@RequestParam("id") int playlistId) throws SQLException {
         return playlistService.find(playlistId);
     }
 

@@ -2,6 +2,9 @@ package com.ejjumo.playlist.service;
 
 import com.ejjumo.playlist.dao.PlaylistDAO;
 import com.ejjumo.playlist.dto.Playlist;
+import com.ejjumo.playlist.dto.PlaylistWithSong;
+import com.ejjumo.song.dao.SongDAO;
+import com.ejjumo.song.dto.Song;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -9,33 +12,37 @@ import java.util.List;
 
 @Service
 public class PlaylistServiceImpl implements PlaylistService {
-    private final PlaylistDAO playlistdao;
+    private final PlaylistDAO playlistDAO;
+    private final SongDAO songDAO;
 
-    public PlaylistServiceImpl(PlaylistDAO playlistdao) {
-        this.playlistdao = playlistdao;
+    public PlaylistServiceImpl(PlaylistDAO playlistDAO, SongDAO songDAO) {
+        this.playlistDAO = playlistDAO;
+        this.songDAO = songDAO;
     }
 
     public int create(Playlist playlist) throws SQLException {
-        return playlistdao.insert(playlist);
+        return playlistDAO.insert(playlist);
     }
 
     public int modify(Playlist playlist) throws SQLException {
-        return playlistdao.update(playlist);
+        return playlistDAO.update(playlist);
     }
 
     public int remove(int playlistId) throws SQLException {
-        return playlistdao.delete(playlistId);
+        return playlistDAO.delete(playlistId);
     }
 
-    public Playlist find(int playlistId) throws SQLException {
-        return playlistdao.select(playlistId);
+    public PlaylistWithSong find(int playlistId) throws SQLException {
+        Playlist playlist = playlistDAO.select(playlistId);
+        List<Song> songs = songDAO.selectByPlaylist(playlistId);
+        return new PlaylistWithSong(playlist, songs);
     }
 
     public List<Playlist> findAll() throws SQLException {
-        return playlistdao.selectAll();
+        return playlistDAO.selectAll();
     }
 
     public List<Playlist> findUserPlaylists(int userId) throws SQLException {
-        return playlistdao.selectByUserId(userId);
+        return playlistDAO.selectByUserId(userId);
     }
 }
