@@ -5,13 +5,13 @@ import com.ejjumo.song.dto.Song;
 import java.util.List;
 
 public class PlaylistWithSong {
-    private Playlist playlist;
+    private PlaylistDetail playlist;
     private List<Song> songs;
 
     public PlaylistWithSong() {
     }
 
-    public PlaylistWithSong(Playlist playlist, List<Song> songs) {
+    public PlaylistWithSong(PlaylistDetail playlist, List<Song> songs) {
         this.playlist = playlist;
         this.songs = songs;
     }
@@ -24,11 +24,11 @@ public class PlaylistWithSong {
                 '}';
     }
 
-    public Playlist getPlaylist() {
+    public PlaylistDetail getPlaylist() {
         return playlist;
     }
 
-    public void setPlaylist(Playlist playlist) {
+    public void setPlaylist(PlaylistDetail playlist) {
         this.playlist = playlist;
     }
 

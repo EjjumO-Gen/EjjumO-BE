@@ -2,6 +2,7 @@ package com.ejjumo.playlist.service;
 
 import com.ejjumo.playlist.dao.PlaylistDAO;
 import com.ejjumo.playlist.dto.Playlist;
+import com.ejjumo.playlist.dto.PlaylistDetail;
 import com.ejjumo.playlist.dto.PlaylistWithSong;
 import com.ejjumo.song.dao.SongDAO;
 import com.ejjumo.song.dto.Song;
@@ -33,7 +34,7 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     public PlaylistWithSong find(int playlistId) throws SQLException {
-        Playlist playlist = playlistDAO.select(playlistId);
+        PlaylistDetail playlist = playlistDAO.select(playlistId);
         List<Song> songs = songDAO.selectByPlaylist(playlistId);
         return new PlaylistWithSong(playlist, songs);
     }

@@ -1,6 +1,7 @@
 package com.ejjumo.playlist.dao;
 
 import com.ejjumo.playlist.dto.Playlist;
+import com.ejjumo.playlist.dto.PlaylistDetail;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ public interface PlaylistDAO {
     public int update(Playlist playlist) throws SQLException;
     public int delete(int playlistId) throws SQLException;
 
-    public Playlist select(int playlistId) throws SQLException;
+    public PlaylistDetail select(int playlistId) throws SQLException;
     public List<Playlist> selectAll() throws SQLException;
     public List<Playlist> selectByUserId(int userId) throws SQLException;
 }
