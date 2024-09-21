@@ -1,6 +1,7 @@
 package com.ejjumo.user.controller;
 
 import com.ejjumo.user.dto.User;
+import com.ejjumo.user.dto.UserPlaylist;
 import com.ejjumo.user.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class UserController {
     }
 
     @GetMapping()
-    public User getUser(@RequestParam("id") int userId) throws SQLException {
+    public UserPlaylist getUser(@RequestParam("id") int userId) throws SQLException {
         return userService.findUser(userId);
     }
 
