@@ -35,8 +35,13 @@ public class PlaylistController {
     }
 
     @GetMapping("user")
-    public List<Playlist> getUserPlaylists(@RequestParam("id") int userId) throws SQLException {
+    public List<Playlist> getUserPlaylists(@RequestParam("userId") int userId) throws SQLException {
         return playlistService.findUserPlaylists(userId);
+    }
+
+    @DeleteMapping()
+    public int deletePlaylistWithSongs(@RequestParam("id") int playlistId) throws SQLException {
+        return playlistService.remove(playlistId);
     }
 
 }
