@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ejjumo.song.dao.SongDAO">
     <insert id="insert" parameterType="Song">
-        insert into song (song_id songId, title, artist, thumbnail, video_id, duration, playlist_id playlistId)
-        values (#{songId}, #{title}, #{artist}, #{thumbnail}, #{videoId}, #{duration}, #{playlistId})
+        insert into song (title, artist, thumbnail, video_id, duration, playlist_id)
+        values (#{title}, #{artist}, #{thumbnail}, #{videoId}, #{duration}, #{playlistId})
     </insert>
 
     <delete id="delete" parameterType="int">

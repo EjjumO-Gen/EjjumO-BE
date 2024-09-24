@@ -7,6 +7,7 @@ import com.ejjumo.playlist.dto.PlaylistWithSong;
 import com.ejjumo.song.dao.SongDAO;
 import com.ejjumo.song.dto.Song;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -21,8 +22,16 @@ public class PlaylistServiceImpl implements PlaylistService {
         this.songDAO = songDAO;
     }
 
-    public int create(Playlist playlist) throws SQLException {
-        return playlistDAO.insert(playlist);
+
+    public void create(Playlist playlist, List<Song> songs) throws SQLException {
+        playlistDAO.insert(playlist);
+        int playlistId = playlist.getPlaylistId();
+        System.out.println("playlistId = " + playlistId);
+        for (Song song: songs) {
+            System.out.println("song = " + song);
+            song.setPlaylistId(playlistId);
+            songDAO.insert(song);
+        }
     }
 
     public int modify(Playlist playlist) throws SQLException {
