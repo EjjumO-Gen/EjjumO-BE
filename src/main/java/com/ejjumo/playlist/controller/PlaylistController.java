@@ -2,6 +2,7 @@ package com.ejjumo.playlist.controller;
 
 import com.ejjumo.playlist.dto.Playlist;
 import com.ejjumo.playlist.dto.PlaylistWithSong;
+import com.ejjumo.playlist.dto.PlaylistWithSongReq;
 import com.ejjumo.playlist.service.PlaylistService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,11 @@ public class PlaylistController {
         this.playlistService = playlistService;
     }
 
+    @PostMapping()
+    public void addPlaylistWithSongs(@RequestBody PlaylistWithSongReq playlistWithSongReq) throws SQLException {
+        playlistService.create(playlistWithSongReq.getPlaylist(), playlistWithSongReq.getSongs());
+    }
+
     @GetMapping()
     public List<Playlist> getAllPlaylists() throws SQLException {
         return playlistService.findAll();
@@ -29,8 +35,13 @@ public class PlaylistController {
     }
 
     @GetMapping("user")
-    public List<Playlist> getUserPlaylists(@RequestParam("id") int userId) throws SQLException {
+    public List<Playlist> getUserPlaylists(@RequestParam("userId") int userId) throws SQLException {
         return playlistService.findUserPlaylists(userId);
+    }
+
+    @DeleteMapping()
+    public int deletePlaylistWithSongs(@RequestParam("id") int playlistId) throws SQLException {
+        return playlistService.remove(playlistId);
     }
 
 }

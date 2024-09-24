@@ -21,4 +21,9 @@ public class SongController {
     public List<Song> getAllSongsByPlaylist(@RequestParam("playlistId") int playlistId) throws SQLException {
         return songService.findByPlaylist(playlistId);
     }
+
+    @DeleteMapping()
+    public int deleteSong(@RequestParam("id") int songId) throws SQLException {
+        return songService.remove(songId);
+    }
 }
