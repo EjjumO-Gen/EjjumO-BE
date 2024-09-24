@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ejjumo.comment.dao.CommentDAO">
     <insert id="insert" parameterType="Comment">
-        insert into comment (comment_id, user_id, playlist_id, content, created_at, updated_at)
-        values (#{commentId}, #{userId}, #{playlistId}, #{content}, now(), now())
+        insert into comment (user_id, playlist_id, content, created_at, updated_at)
+        values (#{userId}, #{playlistId}, #{content}, now(), now())
     </insert>
 
     <delete id="delete" parameterType="int">
