@@ -18,7 +18,7 @@ public class CommentController {
     }
 
     @GetMapping()
-    public PlaylistWithComment getCommentsByPlaylist(@RequestParam("playlist") int playlistId) throws SQLException {
+    public PlaylistWithComment getCommentsByPlaylist(@RequestParam("playlistId") int playlistId) throws SQLException {
         return commentService.findByPlaylist(playlistId);
     }
 }
