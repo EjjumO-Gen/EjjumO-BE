@@ -31,13 +31,13 @@
     </select>
 
     <select id="selectAll" resultType="Playlist">
-        select playlist_id playlistId, user_id userId, playlist_name playlistName, description, created_at createdAt, updated_at updatedAt
+        select playlist_id playlistId, user_id userId, playlist_name playlistName, description, thumbs, created_at createdAt, updated_at updatedAt
         from playlist
     </select>
 
     <select id="selectByUserId" parameterType="int"
             resultType="Playlist">
-        select playlist_id playlistId, user_id userId, playlist_name playlistName, description, created_at createdAt, updated_at updatedAt
+        select playlist_id playlistId, user_id userId, playlist_name playlistName, description, thumbs, created_at createdAt, updated_at updatedAt
         from playlist
         where user_id=#{userId}
     </select>

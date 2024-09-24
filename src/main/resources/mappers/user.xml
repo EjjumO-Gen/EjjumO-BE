@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ejjumo.user.dao.UserDAO">
     <insert id="insert" parameterType="User">
-        insert into user (user_id, user_name, email, password, profile_pic, created_at, updated_at)
-        values (#{userId}, #{userName}, #{email}, #{password}, #{profilePic}, now(), now())
+        insert into user (user_id, user_name, kakao_id, profile_pic, created_at, updated_at)
+        values (#{userId}, #{userName}, #{kakao_id}, #{profilePic}, now(), now())
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -14,15 +14,15 @@
 
     <select id="select" parameterType="int"
             resultType="User">
-        select user_id userId, user_name userName, kakao_id kakaoId, total_thumbs totalThumbs, profile_pic profilePic, refresh_token refreshToken
-        from user
-        where user_id=#{userId}
+        select u.user_id userId, user_name userName, kakao_id kakaoId, (
+            select ifnull(sum(thumbs), 0) from playlist p where u.user_id=p.user_id
+        ) as totalThumbs, profile_pic profilePic, refresh_token refreshToken from user u where user_id=#{userId};
     </select>
 
     <select id="selectAll" resultType="User">
-        select user_id userId, user_name userName, kakao_id kakaoId, total_thumbs totalThumbs, profile_pic profilePic, refresh_token refreshToken
-        from user
-        order by total_thumbs desc
+        select u.user_id userId, user_name userName, kakao_id kakaoId, (
+            select ifnull(sum(thumbs), 0) from playlist p where u.user_id=p.user_id
+        ) as totalThumbs, profile_pic profilePic, refresh_token refreshToken from user u order by totalThumbs desc;
     </select>
 </mapper>
 
