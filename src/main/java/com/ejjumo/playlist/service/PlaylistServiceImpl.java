@@ -55,10 +55,20 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     public List<Playlist> findAll() throws SQLException {
-        return playlistDAO.selectAll();
+        List<Playlist> playlists = playlistDAO.selectAll();
+        for (Playlist playlist: playlists) {
+            String thumbnail = songDAO.selectThumbnailByPlaylist(playlist.getPlaylistId());
+            playlist.setThumbnail(thumbnail);
+        }
+        return playlists;
     }
 
     public List<Playlist> findUserPlaylists(int userId) throws SQLException {
-        return playlistDAO.selectByUserId(userId);
+        List<Playlist> playlists = playlistDAO.selectByUserId(userId);
+        for (Playlist playlist: playlists) {
+            String thumbnail = songDAO.selectThumbnailByPlaylist(playlist.getPlaylistId());
+            playlist.setThumbnail(thumbnail);
+        }
+        return playlists;
     }
 }

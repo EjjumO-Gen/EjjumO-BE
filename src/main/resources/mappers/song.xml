@@ -18,6 +18,10 @@
         from song
         where playlist_id=#{playlistId}
     </select>
+
+    <select id="selectThumbnailByPlaylist" parameterType="int" resultType="String">
+        select thumbnail from song where playlist_id=#{playlistId} limit 1
+    </select>
 </mapper>
 
 

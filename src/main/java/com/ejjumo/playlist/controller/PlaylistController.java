@@ -25,7 +25,7 @@ public class PlaylistController {
         playlistService.create(playlistWithSongReq.getPlaylist(), playlistWithSongReq.getSongs());
     }
 
-    @GetMapping()
+    @GetMapping("list")
     public List<Playlist> getAllPlaylists() throws SQLException {
         return playlistService.findAll();
     }
