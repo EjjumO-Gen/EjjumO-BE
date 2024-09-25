@@ -21,8 +21,8 @@ public class PlaylistController {
     }
 
     @PostMapping()
-    public void addPlaylistWithSongs(@RequestBody PlaylistWithSongReq playlistWithSongReq) throws SQLException {
-        playlistService.create(playlistWithSongReq.getPlaylist(), playlistWithSongReq.getSongs());
+    public int addPlaylistWithSongs(@RequestBody PlaylistWithSongReq playlistWithSongReq) throws SQLException {
+        return playlistService.create(playlistWithSongReq.getPlaylist(), playlistWithSongReq.getSongs());
     }
 
     @GetMapping("list")

@@ -23,7 +23,7 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
 
-    public void create(Playlist playlist, List<Song> songs) throws SQLException {
+    public int create(Playlist playlist, List<Song> songs) throws SQLException {
         playlistDAO.insert(playlist);
         int playlistId = playlist.getPlaylistId();
         System.out.println("playlistId = " + playlistId);
@@ -32,6 +32,7 @@ public class PlaylistServiceImpl implements PlaylistService {
             song.setPlaylistId(playlistId);
             songDAO.insert(song);
         }
+        return playlistId;
     }
 
     public int modify(Playlist playlist) throws SQLException {

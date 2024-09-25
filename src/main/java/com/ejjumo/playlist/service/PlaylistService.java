@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface PlaylistService {
-    public void create(Playlist playlist, List<Song> songs) throws SQLException;
+    public int create(Playlist playlist, List<Song> songs) throws SQLException;
     public int modify(Playlist playlist) throws SQLException;
 
     @Transactional
