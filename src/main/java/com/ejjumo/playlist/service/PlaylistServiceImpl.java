@@ -38,6 +38,12 @@ public class PlaylistServiceImpl implements PlaylistService {
         return playlistDAO.update(playlist);
     }
 
+    public int thumbsUp(int playlistId, int userId) throws SQLException {
+        playlistDAO.insertThumbsUp(playlistId, userId);
+        playlistDAO.updateThumbsUp(playlistId);
+        return playlistDAO.select(playlistId).getThumbs();
+    }
+
     public int remove(int playlistId) throws SQLException {
         return playlistDAO.delete(playlistId);
     }
