@@ -17,8 +17,18 @@ public class CommentController {
         this.commentService = commentService;
     }
 
+    @PostMapping()
+    public int addComment(@RequestBody Comment comment) throws SQLException {
+        return commentService.create(comment);
+    }
+
     @GetMapping()
     public PlaylistWithComment getCommentsByPlaylist(@RequestParam("playlistId") int playlistId) throws SQLException {
         return commentService.findByPlaylist(playlistId);
+    }
+
+    @DeleteMapping()
+    public int deleteComment(@RequestParam("id") int commentId) throws SQLException {
+        return commentService.remove(commentId);
     }
 }

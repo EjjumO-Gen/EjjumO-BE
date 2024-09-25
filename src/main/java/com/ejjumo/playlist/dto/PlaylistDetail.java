@@ -105,11 +105,11 @@ public class PlaylistDetail {
         this.comments = comments;
     }
 
-    public boolean isThumbsup() {
+    public boolean getIsThumbsup() {
         return isThumbsup;
     }
 
-    public void setThumbsup(boolean thumbsup) {
-        isThumbsup = thumbsup;
+    public void setIsThumbsup(boolean isThumbsup) {
+        this.isThumbsup = isThumbsup;
     }
 }

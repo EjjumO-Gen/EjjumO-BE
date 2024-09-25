@@ -13,6 +13,19 @@
         where playlist_id=#{playlistId}
     </update>
 
+    <insert id="insertThumbsUp" parameterType="int">
+        insert into thumbsup (playlist_id, user_id, is_thumbsup)
+        values (#{playlistId}, #{userId}, 1)
+        on duplicate key update is_thumbsup=1-is_thumbsup;
+    </insert>
+
+    <update id="updateThumbsUp" parameterType="int">
+        update playlist
+        set thumbs = (
+               select count(*) from thumbsUp where playlist_id = #{playlistId} and is_thumbsup = 1
+        ) where playlist_id = #{playlistId}
+    </update>
+
     <delete id="delete" parameterType="int">
         delete from playlist where playlist_id=#{playlistId}
     </delete>
@@ -22,7 +35,7 @@
         select p.playlist_id playlistId, u.user_id userId, user_name userName, playlist_name playlistName, description, thumbs, (
             select count(*) from comment c where c.playlist_id=p.playlist_id
         ) comments, (
-            select is_thumbsup from thumbsup t where p.playlist_id=t.playlist_id
+            select is_thumbsup from thumbsup t where p.playlist_id=t.playlist_id and t.user_id=3
         ) isThumbsup, (
             select thumbnail from song s where s.playlist_id=p.playlist_id limit 1
         ) thumbnail

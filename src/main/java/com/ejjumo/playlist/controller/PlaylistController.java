@@ -4,6 +4,7 @@ import com.ejjumo.playlist.dto.Playlist;
 import com.ejjumo.playlist.dto.PlaylistWithSong;
 import com.ejjumo.playlist.dto.PlaylistWithSongReq;
 import com.ejjumo.playlist.service.PlaylistService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -42,6 +43,11 @@ public class PlaylistController {
     @DeleteMapping()
     public int deletePlaylistWithSongs(@RequestParam("id") int playlistId) throws SQLException {
         return playlistService.remove(playlistId);
+    }
+
+    @PatchMapping()
+    public int thumbsUp(@RequestParam("id") int playlistId, @RequestParam("userId") int userId) throws SQLException {
+        return playlistService.thumbsUp(playlistId, userId);
     }
 
 }
