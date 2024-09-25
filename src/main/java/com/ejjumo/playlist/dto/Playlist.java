@@ -8,18 +8,20 @@ public class Playlist {
     private String playlistName;
     private String description;
     private int thumbs;
+    private String thumbnail;
     private Date createdAt;
     private Date updatedAt;
 
     public Playlist() {
     }
 
-    public Playlist(int playlistId, int userId, String playlistName, String description, int thumbs, Date createdAt, Date updatedAt) {
+    public Playlist(int playlistId, int userId, String playlistName, String description, int thumbs, String thumbnail, Date createdAt, Date updatedAt) {
         this.playlistId = playlistId;
         this.userId = userId;
         this.playlistName = playlistName;
         this.description = description;
         this.thumbs = thumbs;
+        this.thumbnail = thumbnail;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -32,6 +34,7 @@ public class Playlist {
                 ", playlistName='" + playlistName + '\'' +
                 ", description='" + description + '\'' +
                 ", thumbs=" + thumbs +
+                ", thumbnail='" + thumbnail + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
@@ -75,6 +78,14 @@ public class Playlist {
 
     public void setThumbs(int thumbs) {
         this.thumbs = thumbs;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public Date getCreatedAt() {

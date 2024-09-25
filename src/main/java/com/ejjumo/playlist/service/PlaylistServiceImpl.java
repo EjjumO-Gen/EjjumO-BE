@@ -23,7 +23,7 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
 
-    public void create(Playlist playlist, List<Song> songs) throws SQLException {
+    public int create(Playlist playlist, List<Song> songs) throws SQLException {
         playlistDAO.insert(playlist);
         int playlistId = playlist.getPlaylistId();
         System.out.println("playlistId = " + playlistId);
@@ -32,6 +32,7 @@ public class PlaylistServiceImpl implements PlaylistService {
             song.setPlaylistId(playlistId);
             songDAO.insert(song);
         }
+        return playlistId;
     }
 
     public int modify(Playlist playlist) throws SQLException {
@@ -55,10 +56,20 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     public List<Playlist> findAll() throws SQLException {
-        return playlistDAO.selectAll();
+        List<Playlist> playlists = playlistDAO.selectAll();
+        for (Playlist playlist: playlists) {
+            String thumbnail = songDAO.selectThumbnailByPlaylist(playlist.getPlaylistId());
+            playlist.setThumbnail(thumbnail);
+        }
+        return playlists;
     }
 
     public List<Playlist> findUserPlaylists(int userId) throws SQLException {
-        return playlistDAO.selectByUserId(userId);
+        List<Playlist> playlists = playlistDAO.selectByUserId(userId);
+        for (Playlist playlist: playlists) {
+            String thumbnail = songDAO.selectThumbnailByPlaylist(playlist.getPlaylistId());
+            playlist.setThumbnail(thumbnail);
+        }
+        return playlists;
     }
 }

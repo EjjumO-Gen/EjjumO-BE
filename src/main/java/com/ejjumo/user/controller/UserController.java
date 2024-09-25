@@ -23,7 +23,7 @@ public class UserController {
         return userService.findUser(userId);
     }
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public List<User> getAllUsers() throws SQLException {
         return userService.findAllUsers();
     }

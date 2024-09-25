@@ -12,4 +12,5 @@ public interface SongDAO {
     public int delete(int songId) throws SQLException;
 
     public List<Song> selectByPlaylist(int playlistId) throws SQLException;
+    public String selectThumbnailByPlaylist(int playlistId) throws SQLException;
 }
