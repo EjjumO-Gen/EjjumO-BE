@@ -46,6 +46,7 @@
     <select id="selectAll" resultType="Playlist">
         select playlist_id playlistId, user_id userId, playlist_name playlistName, description, thumbs, created_at createdAt, updated_at updatedAt
         from playlist
+        order by thumbs desc
     </select>
 
     <select id="selectByUserId" parameterType="int"
@@ -53,6 +54,7 @@
         select playlist_id playlistId, user_id userId, playlist_name playlistName, description, thumbs, created_at createdAt, updated_at updatedAt
         from playlist
         where user_id=#{userId}
+        order by updated_at desc
     </select>
 </mapper>
 
