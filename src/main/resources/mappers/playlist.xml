@@ -26,6 +26,11 @@
         ) where playlist_id = #{playlistId}
     </update>
 
+    <select id="checkThumbsUp" parameterType="int"
+            resultType="int">
+        select count(*) from thumbsup where playlist_id=#{playlistId} and user_id=#{userId} and is_thumbsup=1
+    </select>
+
     <delete id="delete" parameterType="int">
         delete from playlist where playlist_id=#{playlistId}
     </delete>
@@ -46,6 +51,7 @@
     <select id="selectAll" resultType="Playlist">
         select playlist_id playlistId, user_id userId, playlist_name playlistName, description, thumbs, created_at createdAt, updated_at updatedAt
         from playlist
+        order by thumbs desc
     </select>
 
     <select id="selectByUserId" parameterType="int"
@@ -53,6 +59,7 @@
         select playlist_id playlistId, user_id userId, playlist_name playlistName, description, thumbs, created_at createdAt, updated_at updatedAt
         from playlist
         where user_id=#{userId}
+        order by updated_at desc
     </select>
 </mapper>
 

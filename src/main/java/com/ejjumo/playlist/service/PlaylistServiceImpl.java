@@ -4,6 +4,7 @@ import com.ejjumo.playlist.dao.PlaylistDAO;
 import com.ejjumo.playlist.dto.Playlist;
 import com.ejjumo.playlist.dto.PlaylistDetail;
 import com.ejjumo.playlist.dto.PlaylistWithSong;
+import com.ejjumo.playlist.dto.ThumbsUp;
 import com.ejjumo.song.dao.SongDAO;
 import com.ejjumo.song.dto.Song;
 import org.springframework.stereotype.Service;
@@ -39,10 +40,12 @@ public class PlaylistServiceImpl implements PlaylistService {
         return playlistDAO.update(playlist);
     }
 
-    public int thumbsUp(int playlistId, int userId) throws SQLException {
+    public ThumbsUp thumbsUp(int playlistId, int userId) throws SQLException {
         playlistDAO.insertThumbsUp(playlistId, userId);
         playlistDAO.updateThumbsUp(playlistId);
-        return playlistDAO.select(playlistId).getThumbs();
+        int isThumbsUp = playlistDAO.checkThumbsUp(playlistId, userId);
+        int thumbs = playlistDAO.select(playlistId).getThumbs();
+        return new ThumbsUp(isThumbsUp == 1, thumbs);
     }
 
     public int remove(int playlistId) throws SQLException {
