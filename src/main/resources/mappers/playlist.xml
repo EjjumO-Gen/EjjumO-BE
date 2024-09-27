@@ -26,6 +26,11 @@
         ) where playlist_id = #{playlistId}
     </update>
 
+    <select id="checkThumbsUp" parameterType="int"
+            resultType="int">
+        select count(*) from thumbsup where playlist_id=#{playlistId} and user_id=#{userId} and is_thumbsup=1
+    </select>
+
     <delete id="delete" parameterType="int">
         delete from playlist where playlist_id=#{playlistId}
     </delete>
