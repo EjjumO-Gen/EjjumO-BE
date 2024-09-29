@@ -22,7 +22,7 @@
     <update id="updateThumbsUp" parameterType="int">
         update playlist
         set thumbs = (
-               select count(*) from thumbsUp where playlist_id = #{playlistId} and is_thumbsup = 1
+               select count(*) from thumbsup where playlist_id = #{playlistId} and is_thumbsup = 1
         ) where playlist_id = #{playlistId}
     </update>
 
